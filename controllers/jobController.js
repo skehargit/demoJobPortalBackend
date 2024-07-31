@@ -62,7 +62,7 @@ export const createJob = async (req, res, next) => {
     company.jobPosts.push(job._id);
     await company.save();
 
-    res.status(200).json({
+    res.status(201).json({
       success: true,
       message: "Job Posted Successfully",
       job,
@@ -262,9 +262,9 @@ export const getJobById = async (req, res, next) => {
 export const deleteJobPost = async (req, res, next) => {
   try {
     const { id } = req.params;
-
+    const companyId = req.body.user.userId;
     await Application.deleteMany({job:id})
-
+    await Companies.findByIdAndUpdate({_id:companyId},{ $pull: { jobPosts:id } })
     await Jobs.findByIdAndDelete(id);
 
     res.status(200).send({

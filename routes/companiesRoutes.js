@@ -30,9 +30,8 @@ router.post("/login", limiter, signIn);
 // GET DATA
 router.post("/get-company-profile", userAuth, getCompanyProfile);
 router.post("/get-company-joblisting", userAuth, getCompanyJobListing);
-router.get("/companies", getCompanies);
+router.get("/get-companies", getCompanies);
 router.get("/get-company/:id", getCompanyById);
-// router.get("/get-company/", getCompanyById);
 
 // UPDATE DATA
 router.put("/update-company", userAuth, updateCompanyProfile);

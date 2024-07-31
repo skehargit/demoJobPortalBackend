@@ -170,15 +170,17 @@ export const signIn = async (req, res, next) => {
     const isMatch = await user.comparePassword(password);
 
     if (!isMatch) {
-      next("Invalid email or password");
-      return;
+      return res.status(401).json({
+        success:false,
+        msg:"wrong password",
+      })
     }
 
     user.password = undefined;
 
     const token = user.createJWT();
 
-    res.status(201).json({
+    res.status(202).json({
       success: true,
       message: "Login successfully",
       user,
