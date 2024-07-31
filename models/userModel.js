@@ -34,7 +34,11 @@ const userSchema = new mongoose.Schema({
   exprience:{
     type:Number
   },
-  skills:[String]
+  skills:[String],
+  appliedJobs:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"Application"
+  }
 },
   { timestamps: true }
 );

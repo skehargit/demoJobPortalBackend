@@ -120,7 +120,14 @@ export const updateJob = async (req, res, next) => {
       _id: jobId,
     };
 
-    await Jobs.findByIdAndUpdate(jobId, jobPost, { new: true });
+    const jobupdate = await Jobs.findByIdAndUpdate(jobId, jobPost, { new: true })
+
+    if(!jobupdate){
+      return res.status(404).json({
+        success:false,
+        message:"Job not found"
+      })
+    }
 
     res.status(200).json({
       success: true,
